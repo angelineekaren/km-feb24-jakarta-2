@@ -42,48 +42,26 @@
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Location</th>
-                <th>Month</th>
-                <th>Total Machines</th>
-                <th>Unique Product Sold</th>
-                <th>Total Sales</th>
-                <th>Total Quantity Sold</th>
-                <th>Total Transactions</th>
-                <th>Cash Sales</th>
-                <th>Credit Sales</th>
-                <th>Carbonated Sales</th>
-                <th>Food Sales</th>
-                <th>Non Carbonated Sales</th>
-                <th>Water Sales</th>
-                <th>Mapped Total Sales</th>
-                <th>Average Product Price</th>
-                <th>Max Product Price</th>
-                <th>Min Product Price</th>
-                <th>Total Machine Types</th>
-                <th>Total Unique CoilsUsed</th>
+                <th>Status</th>
+                <th>Device ID</th>
+                <th>Machine</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Transaction</th>
+                <th>TransDate</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Location</th>
-                <th>Month</th>
-                <th>Total Machines</th>
-                <th>Unique Product Sold</th>
-                <th>Total Sales</th>
-                <th>Total Quantity Sold</th>
-                <th>Total Transactions</th>
-                <th>Cash Sales</th>
-                <th>Credit Sales</th>
-                <th>Carbonated Sales</th>
-                <th>Food Sales</th>
-                <th>Non Carbonated Sales</th>
-                <th>Water Sales</th>
-                <th>Mapped Total Sales</th>
-                <th>Average Product Price</th>
-                <th>Max Product Price</th>
-                <th>Min Product Price</th>
-                <th>Total Machine Types</th>
-                <th>Total Unique CoilsUsed</th>
+                <th>Status</th>
+                <th>Device ID</th>
+                <th>Machine</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Transaction</th>
+                <th>TransDate</th>
+                <th>Type</th>
             </tr>
         </tfoot>
     </table>
@@ -92,27 +70,16 @@
   <script>
     $(document).ready(function() {
         $('#example').DataTable({
-            "ajax": "data/Pivot_Table.json",
+            "ajax": "data/vending_machine.json",
             "columns": [
-                { "data": "Location" },
-                { "data": "Month" },
-                { "data": "TotalMachines" },
-                { "data": "UniqueProductsSold" },
-                { "data": "TotalSales" },
-                { "data": "TotalQuantitySold" },
-                { "data": "TotalTransactions" },
-                { "data": "CashSales" },
-                { "data": "CreditSales" },
-                { "data": "CarbonatedSales" },
-                { "data": "FoodSales" },
-                { "data": "NonCarbonatedSales" },
-                { "data": "WaterSales" },
-                { "data": "MappedTotalSales" },
-                { "data": "AverageProductPrice" },
-                { "data": "MaxProductPrice" },
-                { "data": "MinProductPrice" },
-                { "data": "TotalMachineTypes" },
-                { "data": "TotalUniqueCoilsUsed" },
+                { "data": "Status" },
+                { "data": "Device ID" },
+                { "data": "Machine" },
+                { "data": "Product" },
+                { "data": "Category" },
+                { "data": "Transaction" },
+                { "data": "TransDate" },
+                { "data": "Type" },
             ]
         });
     });
