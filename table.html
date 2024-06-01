@@ -10,10 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <!-- DataTables JS -->
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
   <title>Table Data</title>
 </head>
@@ -33,40 +33,38 @@
   </aside>
 
   <div class="content">
-    
     <div class="header font">
       <h1>Table Data</h1>
-
     </div>
 
     <table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>Status</th>
-                <th>Device ID</th>
-                <th>Machine</th>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Transaction</th>
-                <th>TransDate</th>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Status</th>
-                <th>Device ID</th>
-                <th>Machine</th>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Transaction</th>
-                <th>TransDate</th>
-                <th>Type</th>
-            </tr>
-        </tfoot>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Device ID</th>
+          <th>Machine</th>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Transaction</th>
+          <th>TransDate</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th>Status</th>
+          <th>Device ID</th>
+          <th>Machine</th>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Transaction</th>
+          <th>TransDate</th>
+          <th>Type</th>
+        </tr>
+      </tfoot>
     </table>
-
   </div>
+
   <script>
     $(document).ready(function() {
         $('#example').DataTable({
@@ -83,6 +81,6 @@
             ]
         });
     });
-</script>
+  </script>
 </body>
 </html>
