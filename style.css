@@ -153,3 +153,52 @@ body {
 .center{
   align-items: center;
 }
+
+table.dataTable thead th {
+  background-color: #67a967;
+  color: white; 
+  position: relative;
+  z-index: 1;
+  padding: 15px 10px;
+  border-top: 3px solid #57a857;
+  border-left: 3px solid #57a857;
+  border-right: 3px solid #098009;
+  border-bottom: 3px solid #071107;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+}
+
+table.dataTable tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+table.dataTable tbody td {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.dataTables_wrapper {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+table.dataTable {
+  border-radius: 9px;
+  overflow: hidden;
+}
