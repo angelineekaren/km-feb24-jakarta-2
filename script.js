@@ -27,7 +27,7 @@ function returnOptions(
         },
         tooltip: {
           titleFont: {
-            size: 16,
+            size: 18,
           },
           bodyFont: {
             size: 16,
@@ -37,7 +37,7 @@ function returnOptions(
           labels: {
             color: "#2B262D",
             font: {
-              size: 12,
+              size: 10,
             },
           },
         },
@@ -50,17 +50,18 @@ function returnOptions(
             display: true,
             text: xDesc,
             font: {
-              size: 14,
+              size: 11,
+              weight: 'bold',
             },
             padding: {
-              top: 10,
+              top: 9,
             },
             color: "#2B262D",
           },
           ticks: {
             color: "#2B262D",
             font: {
-              size: 16,
+              size: 10,
             },
           },
           grid: {
@@ -73,7 +74,8 @@ function returnOptions(
             display: true,
             text: yDesc,
             font: {
-              size: 16,
+              size: 11,
+              weight: 'bold',
             },
             padding: {
               bottom: 10,
@@ -83,7 +85,7 @@ function returnOptions(
           ticks: {
             color: "#2B262D",
             font: {
-              size: 16,
+              size: 9,
             },
           },
           grid: {
@@ -104,7 +106,7 @@ const vmLocation = [
   "Earle Asphalt",
   "GuttenPlans",
 ];
-const categorySales = {};
+let categorySales = {};
 const totalSaleFromMachine = {};
 const totalTransactionsFromMachine = {};
 const cashSalesFromMachine = {};
@@ -114,7 +116,230 @@ const transactionOnVendingMachineEachcategory = [];
 const test = [];
 const uniquePlace = [];
 const uniqueDate = [];
-const avgSales = [];
+let avgSales = [];
+let myChart1 = null;
+let arr = [true, true, true, true]
+let arrCategory = [true, true, true, true]
+
+let checkboxes = document.getElementsByClassName('checkbox-location')
+for (let index = 0; index < checkboxes.length; index++) {
+  checkboxes[index].addEventListener('click', () => {
+    selectedCheckbox(index)
+  })
+  checkboxes[index].checked = true
+}
+
+let checkboxes_category = document.getElementsByClassName('checkbox-category')
+for (let index = 0; index < checkboxes_category.length; index++) {
+  checkboxes_category[index].addEventListener('click', () => {
+    selectedCheckboxCategory(index)
+  })
+  checkboxes_category[index].checked = true
+}
+
+function selectedCheckboxCategory(idx) {
+  arrCategory[idx] = !arrCategory[idx]
+  chartCategory()
+}
+
+function chartCategory() {
+  selected_category = []
+
+  new_cat = ['Carbonated', 'Non Carbonated', 'Food', 'Water']
+  for (let i = 0; i < arrCategory.length; i++) {
+    if (arrCategory[i] == true){
+      selected_category.push(new_cat[i])
+    }
+  }
+    categorySalesTemp = {}
+  for (let i = 0; i < selected_category.length; i++) {
+    categorySalesTemp[selected_category[i]] = categorySales[selected_category[i]]
+  }
+
+  // updateChart2()
+  updateChart3(categorySalesTemp)
+  updateChart5(selected_category)
+}
+
+function updateChart5(selected_category) {
+  myChart5.destroy()
+  let data = {
+    labels: uniquePlace,
+    datasets: []
+  }
+  ds = []
+
+  for (let i = 0; i < selected_category.length; i++) {
+    ob = {
+      label: selected_category[i],
+      data: test[selected_category[i]],
+    }
+      ds.push(ob)
+  }
+  data.datasets = ds
+  const config = returnOptions(
+    "bar",
+    data,
+    "Top Selling Category Across Machine",
+    "Category",
+    "Location",
+    true,
+    true,
+    "y"
+  );
+
+  myChart5 = new Chart(document.getElementById("chart5"), config);
+
+}
+function updateChart3(catSales){
+  myChart3.destroy()
+  const data = {
+    labels: category,
+    datasets: [
+      {
+        label: "Total Sales",
+        data: catSales,
+        backgroundColor: "#033495",
+        borderColor: "#033495",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const config = returnOptions(
+    "bar",
+    data,
+    "Sales in each Category",
+    "Category",
+    "Total Sales",
+    false,
+    false,
+    "x"
+  );
+  myChart3 = new Chart(document.getElementById("chart3"), config);
+
+}
+function selectedCheckbox(idx) {
+  arr[idx] = !arr[idx]
+  chart()
+
+  selected_category = []
+
+  new_cat = ['Brunswick Sq Mall', 'EB Public Library', 'Earle Asphalt', 'GuttenPlans']
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == true){
+      selected_category.push(new_cat[i])
+    }
+  }
+  updateChart2(selected_category)
+  updateChart4(selected_category)
+}
+
+function updateChart2(selected_category) {
+  newCash = {}
+  newCredit = {}
+  for (let i = 0; i < selected_category.length; i++) {
+    newCash[selected_category[i]] =  cashSalesFromMachine[selected_category[i]];
+    newCredit[selected_category[i]]=  creditSalesFromMachine[selected_category[i]];
+  }
+  myChart2.destroy()
+  
+  const data = {
+    labels: uniquePlace,
+    datasets: [
+      {
+        label: "Cash",
+        data: newCash,
+        backgroundColor: "#6A9CFD",
+        borderColor: "#6A9CFD",
+        borderWidth: 1,
+      },
+      {
+        label: "Credit",
+        data: newCredit,
+        backgroundColor: "#FFB8D0",
+        borderColor: "#FFB8D0",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const config = returnOptions(
+    "bar",
+    data,
+    "Payment Type in each Machine",
+    "Location",
+    "Total Transaction",
+    false,
+    false,
+    "x"
+  );
+  myChart2 = new Chart(document.getElementById("chart2"), config);
+}
+
+function updateChart4(selected_category) {
+  myChart4.destroy()
+  const data = {
+    labels: uniqueDate
+  }
+
+  ds = []
+
+  for (let i = 0; i < selected_category.length; i++) {
+    obj = {
+      label: selected_category[i],
+      data: transactionOnVendingMachineEachMonth[selected_category[i]]
+    }
+    ds.push(obj)
+  }
+  data.datasets = ds
+  console.log('ds:', data)
+
+  const  config = returnOptions(
+    "bar",
+    data,
+    "Peak Sales Date",
+    "Transaction Date",
+    "Transaction Count",
+    false,
+    false,
+    "x"
+  );
+  myChart4 = new Chart(document.getElementById("chart4"), config);
+}
+
+function chart() {
+  myChart1.destroy()
+  avgSales = []
+  uniquePlace.forEach((element, idx) => {
+    var avg = totalSaleFromMachine[element] / totalTransactionsFromMachine[element];
+    let number = arr[idx] ? avg : null
+    avgSales.push(number);
+  });
+  const dataChart = {
+    labels: uniquePlace,
+    datasets: [
+      {
+        label: "Average Transaction",
+        data: avgSales,
+        borderColor: "#6A9CFD",
+        backgroundColor: "#6A9CFD",
+      },
+    ],
+  };
+  const configCharrt = returnOptions(
+    "line",
+    dataChart,
+    "Average Value of Transaction",
+    "Location",
+    "Avg Transaction",
+    false,
+    false,
+    "x"
+  );
+
+  myChart1 = new Chart(document.getElementById("chart1"), configCharrt);
+}
 
 categorySales["Carbonated"] = parseFloat(0);
 categorySales["Food"] = parseFloat(0);
@@ -129,8 +354,6 @@ fetch("./data/Pivot_Table.json")
     return response.json();
   })
   .then((response) => {
-    console.log("asdf");
-
     response.data.map((value) => {
       const {
         Location,
@@ -208,10 +431,10 @@ fetch("./data/Pivot_Table.json")
     });
 
     // Calculate average sales per transaction by location
-    uniquePlace.forEach((element) => {
-      var avg =
-        totalSaleFromMachine[element] / totalTransactionsFromMachine[element];
-      avgSales.push(avg);
+    uniquePlace.forEach((element, idx) => {
+      var avg = totalSaleFromMachine[element] / totalTransactionsFromMachine[element];
+      let number = arr[idx] ? avg : null
+      avgSales.push(number);
     });
 
     const dataChart1 = {
@@ -378,15 +601,15 @@ fetch("./data/Pivot_Table.json")
       "y"
     );
 
-    const myChart1 = new Chart(document.getElementById("chart1"), configChart1);
+    myChart1 = new Chart(document.getElementById("chart1"), configChart1);
 
-    const myChart2 = new Chart(document.getElementById("chart2"), configChart2);
+    myChart2 = new Chart(document.getElementById("chart2"), configChart2);
 
-    const myChart3 = new Chart(document.getElementById("chart3"), configChart3);
+    myChart3 = new Chart(document.getElementById("chart3"), configChart3);
 
-    const myChart4 = new Chart(document.getElementById("chart4"), configChart4);
+    myChart4 = new Chart(document.getElementById("chart4"), configChart4);
 
-    const myChart5 = new Chart(document.getElementById("chart5"), configChart5);
+    myChart5 = new Chart(document.getElementById("chart5"), configChart5);
 
     const chartVersion = document.getElementById("chartVersion");
     chartVersion.innerText = Chart.version;
@@ -395,11 +618,12 @@ fetch("./data/Pivot_Table.json")
     console.error("Error fetching data:", error);
   });
 
-document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function() {
   const menuLinks = document.querySelectorAll(".menu-link");
 
   menuLinks.forEach((link) => {
-    link.addEventListener("click", function (event) {
+    link.addEventListener("click", function(event) {
       event.preventDefault();
 
       const targetId = this.getAttribute("href").substring(1);
@@ -411,12 +635,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //coba1
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   var dropdownBtns = document.getElementsByClassName("dropdown-btn");
   var dropdownContents = document.getElementsByClassName("dropdown-content");
 
   for (let i = 0; i < dropdownBtns.length; i++) {
-    dropdownBtns[i].addEventListener("click", function () {
+    dropdownBtns[i].addEventListener("click", function() {
       var content = dropdownContents[i];
       if (content.style.display === "block") {
         content.style.display = "none";
@@ -426,7 +650,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  document.addEventListener("click", function (event) {
+  document.addEventListener("click", function(event) {
     for (let i = 0; i < dropdownBtns.length; i++) {
       if (
         !dropdownBtns[i].contains(event.target) &&
@@ -448,27 +672,41 @@ function showChart(chartId) {
   document.getElementById(chartId).style.display = "block";
 }
 
-document.getElementById("feedbackBtn").addEventListener("click", function () {
+document.getElementById("feedbackBtn").addEventListener("click", function() {
   var feedbackForm = document.getElementById("feedbackForm");
   feedbackForm.style.display = "block";
 });
 
 //sini
 
-document
-  .getElementById("sendFeedbackBtn")
-  .addEventListener("click", function () {
-    var feedbackText = document.getElementById("feedbackText").value;
-    if (feedbackText.trim() !== "") {
-      alert("Thank you for your feedback!");
-      document.getElementById("feedbackText").value = "";
-      document.getElementById("feedbackForm").style.display = "none";
-    } else {
-      alert("Please write feedback before sending.");
-    }
-  });
+document.getElementById('feedbackBtn').addEventListener('click', function () {
+  var feedbackForm = document.getElementById('feedbackForm');
+  feedbackForm.style.display = 'block';
+  document.getElementById('feedbackText').value = ''; // Reset the form when the feedback button is clicked
+});
 
-document.addEventListener("click", function (event) {
+document.getElementById('sendFeedbackBtn').addEventListener('click', function () {
+  var feedbackText = document.getElementById('feedbackText').value;
+  var notification = document.getElementById('notification');
+
+  notification.style.display = 'block'; // Ensure the notification is displayed
+
+  if (feedbackText.trim() === '') {
+    notification.innerText = 'Please write some feedback before sending.';
+    notification.style.color = 'red';
+  } else if (feedbackText.length > 100) {
+    notification.innerText = 'Feedback is too long. Please limit to 100 characters.';
+    notification.style.color = 'red';
+  } else {
+    notification.innerText = 'Thank you for your feedback!';
+    notification.style.color = 'green';
+    document.getElementById('feedbackText').value = ''; // Reset the feedback text area
+  }
+});
+
+
+
+document.addEventListener("click", function(event) {
   var feedbackForm = document.getElementById("feedbackForm");
   var feedbackBtn = document.getElementById("feedbackBtn");
   if (
