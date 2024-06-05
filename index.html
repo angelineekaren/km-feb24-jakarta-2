@@ -53,14 +53,15 @@
               <h4>Location</h4>
             </button>
             <div class="dropdown-content">
-              <input type="checkbox" id="filGlutenP" name="location" value="location">
-              <label for="filGlutenP">Glutten Plans</label><br>
-              <input type="checkbox" id="filEarleA" name="location" value="location">
-              <label for="filEarleA">Earle Asphalt</label><br>
-              <input type="checkbox" id="filEBLibrary" name="location" value="location">
-              <label for="filEBLibrary">EB Public Library</label><br>
-              <input type="checkbox" id="filBrunswickSM" name="location" value="location">
-              <label for="filBrunswickSM">Brunswick Sq Mall</label>
+              <br>
+              <input class="checkbox-location" type="checkbox" id="filGlutenP" name="location" value="location">
+              <label for="filGlutenP">Brunswick Sq Mall</label><br>
+              <input class="checkbox-location" type="checkbox" id="filEarleA" name="location" value="location">
+              <label for="filEarleA">EB Public Library</label><br>
+              <input class="checkbox-location" type="checkbox" id="filEBLibrary" name="location" value="location">
+              <label for="filEBLibrary">Earle Asphalt</label><br>
+              <input class="checkbox-location" type="checkbox" id="filBrunswickSM" name="location" value="location">
+              <label for="filBrunswickSM">Gutten Plans</label>
             </div>
           </div>
 
@@ -69,13 +70,14 @@
               <h4>Category</h4>
             </button>
             <div class="dropdown-content">
-              <input type="checkbox" id="filCarbonate" name="category" value="category">
+              <br>
+              <input class="checkbox-category" type="checkbox" id="filCarbonate" name="category" value="category">
               <label for="filCarbonate">Carbonate</label><br>
-              <input type="checkbox" id="filNonCarbonate" name="category" value="category">
+              <input class="checkbox-category" type="checkbox" id="filNonCarbonate" name="category" value="category">
               <label for="filNonCarbonate">Non Carbonate</label><br>
-              <input type="checkbox" id="filFood" name="category" value="category">
+              <input class="checkbox-category" type="checkbox" id="filFood" name="category" value="category">
               <label for="filFood">Food</label><br>
-              <input type="checkbox" id="filWater" name="category" value="category">
+              <input class="checkbox-category" type="checkbox" id="filWater" name="category" value="category">
               <label for="filWater">Water</label>
             </div>
           </div>
@@ -234,21 +236,21 @@
           </div>
         </div>
         <div class="boxx">
-          <img src="./asset/julian.jpeg">
+          <img src="./asset/julian.jpg">
           <h3>Julian Kurnianto</h3>
           <h5>Front End</h5>
           <div class="icons">
             <a href="https://www.linkedin.com/in/julian-kurnianto-190096233"><i class="ri-linkedin-box-fill"></i></a>
-            <a href="https://www.instagram.com/julian_k3155?igsh=c3o0a21vMWxvYmVj"><i class="ri-instagram-fill"></i></a>
+            <a href="https://www.instagram.com/julian_k3155"><i class="ri-instagram-fill"></i></a>
           </div>
         </div>
         <div class="boxx">
-          <img src="./asset/leonardo.jpeg">
+          <img src="./asset/leonardo.jpg">
           <h3>Leonardo Iclasio</h3>
           <h5>Quality Assurance</h5>
           <div class="icons">
             <a href="https://www.linkedin.com/in/leonardo-iclasio-kaha-7703a62b2"><i class="ri-linkedin-box-fill"></i></a>
-            <a href="https://www.instagram.com/leko.zzz?igsh=aGVjcWdpMm40MzY5"><i class="ri-instagram-fill"></i></a>
+            <a href="https://www.instagram.com/leko.zzz"><i class="ri-instagram-fill"></i></a>
           </div>
         </div>
       </div>
@@ -256,13 +258,15 @@
   </div>
 
   <div class="feedback-button">
-    <button id="feedbackBtn">Tell us what you think!</button>
+    <button id="feedbackBtn" type="button">Tell us what you think!</button>
   </div>
-  <div id="feedbackForm" class="feedback-form">
-    <p>Your feedbacks are highly appreciated <3< /p>
-        <textarea id="feedbackText" placeholder="Write your feedback here..."></textarea>
-        <button id="sendFeedbackBtn">Send Feedback</button>
-  </div>
+  <div id="feedbackForm" class="feedback-form" style="display: none;">
+    <p>Your feedbacks are highly appreciated </p>
+    <textarea id="feedbackText" placeholder="Write your feedback here..."></textarea>
+    <div id="notification" style="display: none;"></div><br>
+    <button id="sendFeedbackBtn" type="button">Send Feedback</button>
+  </div>  
+  
 
   <script src="./script.js"></script>
   <script>
@@ -287,16 +291,6 @@
       feedbackForm.style.display = 'block';
     });
 
-    document.getElementById('sendFeedbackBtn').addEventListener('click', function () {
-      var feedbackText = document.getElementById('feedbackText').value;
-      if (feedbackText.trim() !== '') {
-        alert('Thank you for your feedback!');
-        document.getElementById('feedbackText').value = '';
-        document.getElementById('feedbackForm').style.display = 'none';
-      } else {
-        alert('Please write some feedback before sending.');
-      }
-    });
 
     document.addEventListener('click', function (event) {
       var feedbackForm = document.getElementById('feedbackForm');
